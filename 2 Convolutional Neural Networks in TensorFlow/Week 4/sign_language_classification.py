@@ -10,11 +10,8 @@ def get_data(filename):
 
     with open(filename) as training_file:
         stream_reader = csv.reader(training_file)
-        flag = True
+        next(stream_reader)
         for row in stream_reader:
-            if flag:
-                flag = False
-                continue
             labels.append(row[0])
             images.append(np.array(np.array_split(row[1:785], 28)))
     return np.array(images).astype('float64'), np.array(labels).astype('float64')
@@ -42,6 +39,7 @@ print(testing_labels.shape)
 
 training_images = np.expand_dims(training_images, axis=-1)
 testing_images = np.expand_dims(testing_images, axis=-1)
+
 # Create an ImageDataGenerator and do Image Augmentation
 train_datagen = ImageDataGenerator(
     rescale=1./255,
