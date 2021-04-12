@@ -14,7 +14,7 @@ sentences = [
 ]
 
 tokenizer = Tokenizer(
-    num_words=100,
+    num_words=100, # max words to be tokenized, and picks the most common ‘n’ words
     oov_token='<OOV>' # Token in case of new word
 )
 tokenizer.fit_on_texts(sentences)

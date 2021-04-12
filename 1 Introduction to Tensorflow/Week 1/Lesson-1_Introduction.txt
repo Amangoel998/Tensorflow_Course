@@ -38,3 +38,7 @@ print(model.predict([10.0]))
 10. Epochs provide repetition count which randomizes data and run the training model repeatedly to get desired accuracy.
 11. But even after you try to predict the given value, the value won;t be exact 19.0, since provided data is less and can't really get accurate results.
 12. Another reason is that, instead of finding an absolute formula to predict values, neural net use probability instead.
+
+## Loss in prediction
+- Loss is the penalty for a bad prediction. Loss is a number indicating how bad the model's prediction was on a single example.
+- Loss in prediction can be thought like the confidence in prediction.
