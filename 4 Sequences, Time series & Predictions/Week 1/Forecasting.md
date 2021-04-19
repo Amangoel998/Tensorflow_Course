@@ -3,7 +3,7 @@
 Let's take a Time series with Trends + Noise + Seasonality.
   
 ## 1. Naive Forecasting
-    - For example we could take last values and assume that next value will be same one.
+- For example we could take last values and assume that next value will be same one.
 
 1. Fixed Partitioning
 - To measure performance to train for time series, we can partition into 3 time series.

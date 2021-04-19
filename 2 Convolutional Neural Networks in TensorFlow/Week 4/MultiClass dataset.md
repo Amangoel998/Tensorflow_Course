@@ -1,3 +1,7 @@
+# Multi-Class Dataset
+1. The class_mode is 'categorical' instead of 'binary'.
+2. the output activation func is 'softmax' with all 3 values summing upto one.
+3. Loss function is 'categorical_crossentropy' instead of 'binary_crossentropy'.
 
 ```python
 train_datagen = ImageDataGenerator(rescale=1./255)
@@ -31,12 +35,8 @@ model.compile(
 
 ```
 
-1. The class_mode is 'categorical' instead of 'binary'.
-2. the output activation func is 'softmax' with all 3 values summing upto one.
-3. Loss function is 'categorical_crossentropy' instead of 'binary_crossentropy'.
-
-Note- Since we are using image generators from directory, we get output in sorted order of their directory name ie Paper, Rock & Scissors.
+**Note:** Since we are using image generators from directory, we get output in sorted order of their directory name ie Paper, Rock & Scissors.
 ## References
-1. http://www.laurencemoroney.com/rock-paper-scissors-dataset/
-2. https://colab.research.google.com/github/lmoroney/dlaicourse/blob/master/Course%202%20-%20Part%208%20-%20Lesson%202%20-%20Notebook%20(RockPaperScissors).ipynb
-3. https://www.kaggle.com/datamunge/sign-language-mnist
+1. Dataset link - http://www.laurencemoroney.com/rock-paper-scissors-dataset/
+2. Rock Paper & Scissors Model - https://colab.research.google.com/github/lmoroney/dlaicourse/blob/master/Course%202%20-%20Part%208%20-%20Lesson%202%20-%20Notebook%20(RockPaperScissors).ipynb
+3. Kaggle dataset link - https://www.kaggle.com/datamunge/sign-language-mnist
