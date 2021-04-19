@@ -32,7 +32,7 @@ lrs = 1e-8 * (10 ** (np.arange(100) / 20))
 plt.semilogx(lrs, history.history["loss"])
 plt.axis([1e-8, 1e-3, 0, 300])
 ```
-  <img src="Loss%20per%20epoch.jpg" width="500">
+  <img src="images/Loss%20per%20epoch.jpg" width="500">
 
 > So we can find that 7e-6 is the learning rate at which loss is stably minimum. And we can update the learning rate in optimizer to be following.
 ```python

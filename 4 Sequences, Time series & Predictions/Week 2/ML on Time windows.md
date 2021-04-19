@@ -6,7 +6,7 @@
 - Then over time, we will train model to match 30 features on single label.
   
   
-  <img src="ML%20on%20Time%20window.jpg" width="500">
+  <img src="images/ML%20on%20Time%20window.jpg" width="500">
 
 ```python
 import tensorflow as tf
@@ -108,7 +108,7 @@ print("Weights".format(layer0.get_weights()))
 model.predict(series[1:21][np.newaxis])
 ```
 ### Prediction Output:
-<img src="predciction%20values.jpg" width="500">
+<img src="images/predciction%20values.jpg" width="500">
 
 1. Top array is the 20 values are provided to model as input.
 2. Bottom is the predicted value back form out model.
@@ -122,7 +122,7 @@ forecast = forecast[split_time - window_size:]
 results = np.array(forecast)[:, 0, 0]
 ```
 
-<img src="Forecast%20prediction.jpg" width="500">
+<img src="images/Forecast%20prediction.jpg" width="500">
 
 ### Calculate Mean Absolute Error
 ```python

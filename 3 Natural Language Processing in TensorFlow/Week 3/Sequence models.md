@@ -19,6 +19,8 @@
 - Formula for output --> o = Wo * y
 - Wo = Weight of output layer
 
+    <img src="images/Idea%20of%20RNN.png" width="300">
+
 # Long short - Term memory
 - Along with context passed by RNN, LSTM is has additional cell state pipeline which can pass through the network to impact it.
 - This helps keep context from earlier tokens relevance in later ones, to avoid situation like guessing irish dur to word Ireland in sentence, but actual language being Gaelic.

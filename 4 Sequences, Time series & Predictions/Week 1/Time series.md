@@ -18,31 +18,31 @@ Eg- Analyze sound waves to spot words in audio which can be used as neural netwo
 ## Common Patterns in TS
 1. Trends Pattern TS
     - Like in Moore's law, there is always a direction towards which TS is moving.
-    <img src="Trend%20Time%20series.jpg" width="500">
+    <img src="images/Trend%20Time%20series.jpg" width="500">
 2. Seasonality Pattern TS
     - These pattern is seen when pattern repeat at predictable intervals.
     - Like shopping sites peek on weekends or sport sites peek in traffic at seasons.
-    <img src="Seasonal%20Time%20series.jpg" width="500" alt="Seasonality Time series">
+    <img src="images/Seasonal%20Time%20series.jpg" width="500" alt="Seasonality Time series">
 1. Combination Pattern TS
     - These are combinations of both trend and seasonality.
     - Eg- Chart shows upward trend but with peaks and troughs.
-    <img src="Combination%20Time%20series.jpg" width="500">
+    <img src="images/Combination%20Time%20series.jpg" width="500">
 2. White noise
     - These aren't predictable at all and seems to have completely random data.
-    <img src="White%20noise.jpg" width="500">
+    <img src="images/White%20noise.jpg" width="500">
 3. Auto-Correlation
     - No trend, no seasonality, spikes appear at random time stamps, but complete series isn't random.
     - It correlates with delayed copy of itself, called lag.
     - Between spikes there are deterministic type of decay.
     - Memory: are the spikes which are steps dependent upon previous ones..
     - Innovations: are the spikes unpredictable based on previous values.
-    <img src="Auto%20Corelation%20time%20series.jpg" width="500">
+    <img src="images/Auto%20Corelation%20time%20series.jpg" width="500">
 4. Non-Stationary Time series
     - In real-life time series behavior can changes over time.
     - Real-life events can change patterns causing disruption in seasonality and trend.
     - These are called Non-Stationary Time series.
      
-      <img src="Non%20Stationary%20Time%20series.jpg" width="500">
+      <img src="images/Non%20Stationary%20Time%20series.jpg" width="500">
 
 Hence, if we train for limited number of last time steps, with better performance, we can get better accuracy in prediction.
 It breaks the mold, where we always assume that more data is better.
