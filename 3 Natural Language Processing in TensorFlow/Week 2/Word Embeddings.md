@@ -9,7 +9,7 @@ What is the purpose of the embedding dimension?
 It is the number of dimensions for the vector representing the word encoding
 ## Example
 - In below image the reviews of a movies are clustered as positive & negative reviews in 3 dimensional space.
-![Words Embedding](word%20embedding.png)
+<img src="word%20embedding.png" width="400">
 
 ## Tensorflow data services
 - Has many datasets on lots of categories. Like imdb reviews datasets.

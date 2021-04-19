@@ -7,7 +7,7 @@
 
 `ys = tf.keras.utils.to_categorical(labels, num_classes=total_words)`
 
-![Sequence of words](Sequence_for_predicting_next_word.jpg)
+<img src="Sequence_for_predicting_next_word.jpg" width="500">
 
 ## References
 1. https://colab.research.google.com/github/lmoroney/dlaicourse/blob/master/TensorFlow%20In%20Practice/Course%203%20-%20NLP/Course%203%20-%20Week%204%20-%20Lesson%201%20-%20Notebook.ipynb#scrollTo=6Vc6PHgxa6Hm
