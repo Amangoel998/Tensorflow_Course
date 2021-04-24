@@ -1,8 +1,10 @@
 ## Similar RNN like used in images
+
 - Now the words will be grouped in size of the filter(here 5).
 - Convolutions will be learned that can map word classification to desired output.
 - We have 128 filters each for 5 words.
-- So if max_length was 120 words and filter of 5 words, it will discard 2 words from back and front, leaving with 116 words shape sequences.
+- So if max_length was 120 words and filter of 5 words, it will discard 2 words from back and front, leaving with 116
+  words shape sequences.
 
 ```python
 model = tf.keras.Sequential([
@@ -13,13 +15,16 @@ model = tf.keras.Sequential([
     tf.keras.layers.Dense(1, activation='sigmoid')
 ])
 ```
+
 **Note:**
-If a sentence has 120 tokens in it, and a Conv1D with 128 filters with a Kernal size of 5 is passed over it, what’s the output shape?
+If a sentence has 120 tokens in it, and a Conv1D with 128 filters with a Kernal size of 5 is passed over it, what’s the
+output shape?
 (None, 116, 128)
 
-
 ## Gated Recurrent Units (GRU)
+
 - To use GRU in tensorflow, just replace LSTM with GRU in model layer from previous code.
+
 ```python
 model = tf.keras.Sequential([
     tf.keras.layers.Embedding(tokenizer.vocab_size, 64),
@@ -31,4 +36,5 @@ model = tf.keras.Sequential([
 ```
 
 ## Reference
+
 1. https://nlp.stanford.edu/projects/glove/

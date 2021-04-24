@@ -1,4 +1,5 @@
 ## Convolution
+
     Well, if you've ever done any kind of image processing, it usually involves having a filter and passing that filter over the image in order to change the underlying image. 
     For every pixel, take its value, and take a look at the value of its neighbors.
     Then to get the new value for the pixel, we simply multiply each neighbor by the corresponding value in the filter.
@@ -23,10 +24,12 @@
     Reveals Horizontal lines of an image        Reveals Vertical Lines of an image
 
 ## Pooling
+
     It is a way of compressing images
     Eg. - For each four pixels, pick the largest value and re-create an image.
 
 ## Using Tensorflow to Implement convolutional layers
+
     ```python
 
     ```
@@ -55,7 +58,8 @@
     misc lib from scipy, use misc.ascent() return an image 
 
 ## Reference:
+
 1. https://colab.research.google.com/github/lmoroney/dlaicourse/blob/master/Course%201%20-%20Part%206%20-%20Lesson%202%20-%20Notebook.ipynb
 2. https://colab.research.google.com/github/lmoroney/dlaicourse/blob/master/Course%201%20-%20Part%206%20-%20Lesson%202%20-%20Notebook.ipynb#scrollTo=9FGsHhv6JvDx
-3. https://colab.research.google.com/github/lmoroney/dlaicourse/blob/master/Course%201%20-%20Part%206%20-%20Lesson%203%20-%20Notebook.ipynb 
+3. https://colab.research.google.com/github/lmoroney/dlaicourse/blob/master/Course%201%20-%20Part%206%20-%20Lesson%203%20-%20Notebook.ipynb
 4. https://lodev.org/cgtutor/filtering.html

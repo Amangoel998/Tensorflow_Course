@@ -1,11 +1,11 @@
 # Machine Learning on Time Windows
+
 - First we have to divide the data into features and labels.
 - Here our feature is effective a number of values in series with label being next value.
 - That number of values can be called window size.
 - So for 30 days at a time, we use 30 values as feature and next value as label.
 - Then over time, we will train model to match 30 features on single label.
-  
-  
+
   <img src="images/ML%20on%20Time%20window.jpg" width="500">
 
 ```python
@@ -59,19 +59,25 @@ dataset = dataset.batch(2).prefetch(1)
 # y = [[9], [6]]
 
 ```
+
 ## Sequence bias
-Sequence bias is when the order of things can impact the selection of things. So, when training data in a dataset, we don't want the sequence to impact the training in a similar way, so it's good to shuffle them up. 
+
+Sequence bias is when the order of things can impact the selection of things. So, when training data in a dataset, we
+don't want the sequence to impact the training in a similar way, so it's good to shuffle them up.
 
 ## Feeding windowed dataset into neural network
+
 ```python
 def windowed_dataset(series, window_size, batch_size, shuffle_buffer):
     dataset = tf.data.Dataset.from_tensor_slices(series)
-                     .window(window_size+1, shift=1, drop_remainder=True)
-                     .flat_map(lambda window: window.batch(window_size+1))
-                     .shuffle(buffer_size=shuffle_buffer)
-                     .map(lambda window: (window[:-1], window[-1:]))
-                     .batch(batch_size).prefetch(1)
-    return dataset
+    .window(window_size + 1, shift=1, drop_remainder=True)
+    .flat_map(lambda window: window.batch(window_size + 1))
+    .shuffle(buffer_size=shuffle_buffer)
+    .map(lambda window: (window[:-1], window[-1:]))
+    .batch(batch_size).prefetch(1)
+
+
+return dataset
 
 # We split data into training & validatio n set at step 1000.
 split_time = 1000
@@ -96,24 +102,30 @@ model.compile(
 )
 model.fit(dataset, epochs=100, verbose=0)
 ```
+
 > After Linear regression is done, the array is split into 2 arrays, 1st array with 20 values to fit the weight values best it can which is value for x, and 2nd array is b value which is the bias.
 
 `Y = W0*X0 + W1*X1 + W2*X2.... + WnXn + b`
 
 Hence, to predict the values using linear regression, we can use the following
+
 - np.newaxis reshapes the input to the input dimension used by model
+
 ```python
 print("Weights".format(layer0.get_weights()))
 
 model.predict(series[1:21][np.newaxis])
 ```
+
 ### Prediction Output:
+
 <img src="images/predciction%20values.jpg" width="500">
 
 1. Top array is the 20 values are provided to model as input.
 2. Bottom is the predicted value back form out model.
 
 ### Plotting forecast on time series
+
 ```python
 forecast = []
 for time in range(len(series) - window_size):
@@ -125,11 +137,15 @@ results = np.array(forecast)[:, 0, 0]
 <img src="images/Forecast%20prediction.jpg" width="500">
 
 ### Calculate Mean Absolute Error
+
 ```python
 tf.keras.metrics.mean_absolute_error(x_valid, results).numpy()
 # 4.9526777
 ```
 
 ## References
-1. Creating dataset for prediction using our ML model - https://colab.research.google.com/github/lmoroney/dlaicourse/blob/master/TensorFlow%20In%20Practice/Course%204%20-%20S%2BP/S%2BP%20Week%202%20Lesson%201.ipynb
-2. Single layer neural network notebook - https://colab.research.google.com/github/lmoroney/dlaicourse/blob/master/TensorFlow%20In%20Practice/Course%204%20-%20S%2BP/S%2BP%20Week%202%20Lesson%202.ipynb
+
+1. Creating dataset for prediction using our ML model
+   - https://colab.research.google.com/github/lmoroney/dlaicourse/blob/master/TensorFlow%20In%20Practice/Course%204%20-%20S%2BP/S%2BP%20Week%202%20Lesson%201.ipynb
+2. Single layer neural network notebook
+   - https://colab.research.google.com/github/lmoroney/dlaicourse/blob/master/TensorFlow%20In%20Practice/Course%204%20-%20S%2BP/S%2BP%20Week%202%20Lesson%202.ipynb

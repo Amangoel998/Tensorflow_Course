@@ -13,6 +13,8 @@ zip_ref.extractall("/tmp/h-or-s")
 zip_ref.close()
 
 DESIRED_ACCURACY = 0.999
+
+
 class myCallback(tf.keras.callbacks.Callback):
     def on_epoch_end(self, epoch, logs={}):
         if logs.get('acc') > DESIRED_ACCURACY:
@@ -22,7 +24,7 @@ class myCallback(tf.keras.callbacks.Callback):
 
 # This Code Block should Define and Compile the Model. Please assume the images are 150 X 150 in your implementation.
 model = tf.keras.models.Sequential([
-    tf.keras.layers.Conv2D(16, [3, 3], activation='relu', input_shape=(150,150,3)),
+    tf.keras.layers.Conv2D(16, [3, 3], activation='relu', input_shape=(150, 150, 3)),
     tf.keras.layers.MaxPooling2D(pool_size=(2, 2)),
     tf.keras.layers.Conv2D(32, [3, 3], activation='relu'),
     tf.keras.layers.MaxPooling2D(pool_size=(2, 2)),
@@ -36,16 +38,15 @@ model = tf.keras.models.Sequential([
 from tensorflow.keras.optimizers import RMSprop
 
 model.compile(optimizer=RMSprop(lr=0.001),
-loss='binary_crossentropy',
-metrics=['accuracy'])
-    
+              loss='binary_crossentropy',
+              metrics=['accuracy'])
 
 # This code block should create an instance of an ImageDataGenerator called train_datagen 
 # And a train_generator by calling train_datagen.flow_from_directory
 
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
-train_datagen = ImageDataGenerator(rescale=1./255)
+train_datagen = ImageDataGenerator(rescale=1. / 255)
 
 # Please use a target_size of 150 X 150.
 train_generator = train_datagen.flow_from_directory(

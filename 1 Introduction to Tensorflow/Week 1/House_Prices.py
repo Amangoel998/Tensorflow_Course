@@ -1,6 +1,6 @@
-import tensorflow as tf
 import numpy as np
 from tensorflow import keras
+
 
 def house_model(y_new):
     xs = np.array([1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0], dtype=float)
@@ -9,6 +9,7 @@ def house_model(y_new):
     model.compile(optimizer='sgd', loss='mean_squared_error')
     model.fit(xs, ys, epochs=1500, verbose=0)
     return model.predict(y_new)[0]
-    
+
+
 prediction = house_model([7.0])
-print(prediction*10000000)
+print(prediction * 10000000)

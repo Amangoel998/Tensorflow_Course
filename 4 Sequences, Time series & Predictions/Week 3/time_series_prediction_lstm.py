@@ -40,6 +40,7 @@ amplitude = 40
 slope = 0.05
 noise_level = 5
 
+# Create the series
 series = baseline + trend(time, slope) + seasonality(time, period=365, amplitude=amplitude)
 # Update with noise
 series += noise(time, noise_level, seed=42)
@@ -64,18 +65,40 @@ def windowed_dataset(series, window_size, batch_size, shuffle_buffer):
     return dataset
 
 
+# Clears the data from previous session
+tf.keras.backend.clear_session()
+tf.random.set_seed(51)
+np.random.seed(51)
+
+tf.keras.backend.clear_session()
 dataset = windowed_dataset(x_train, window_size, batch_size, shuffle_buffer_size)
-print(dataset)
-l0 = tf.keras.layers.Dense(1, input_shape=[window_size])
-model = tf.keras.models.Sequential([l0])
 
-model.compile(loss="mse", optimizer=tf.keras.optimizers.SGD(lr=1e-6, momentum=0.9))
-model.fit(dataset, epochs=100, verbose=0)
+model = tf.keras.models.Sequential([
+    tf.keras.layers.Lambda(lambda x: tf.expand_dims(x, axis=-1), input_shape=[None]),
+    tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32, return_sequences=True)),
+    tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32)),
+    tf.keras.layers.Dense(1),
+    tf.keras.layers.Lambda(lambda x: x * 100.0)
+])
 
-print("Layer weights {}".format(l0.get_weights()))
+lr_schedule = tf.keras.callbacks.LearningRateScheduler(
+    lambda epoch: 1e-8 * 10 ** (epoch / 20))
+optimizer = tf.keras.optimizers.SGD(lr=1e-5, momentum=0.9)
+model.compile(loss=tf.keras.losses.Huber(),
+              optimizer=optimizer,
+              metrics=["mae"])
+history = model.fit(dataset, epochs=100, callbacks=[lr_schedule])
 
+# Print MAE for our prediction
+tf.keras.metrics.mean_absolute_error(x_valid, results).numpy()
+
+# Plot Graph for learning rate
+plt.semilogx(history.history["lr"], history.history["loss"])
+plt.axis([1e-8, 1e-4, 0, 30])
+
+# Plot graph to actual time series
 forecast = []
-
+results = []
 for time in range(len(series) - window_size):
     forecast.append(model.predict(series[time:time + window_size][np.newaxis]))
 
@@ -87,4 +110,43 @@ plt.figure(figsize=(10, 6))
 plot_series(time_valid, x_valid)
 plot_series(time_valid, results)
 
-tf.keras.metrics.mean_absolute_error(x_valid, results).numpy()
+# Plot graph for MAE and loss
+import matplotlib.image  as mpimg
+import matplotlib.pyplot as plt
+
+# -----------------------------------------------------------
+# Retrieve a list of list results on training and test data
+# sets for each training epoch
+# -----------------------------------------------------------
+mae = history.history['mae']
+loss = history.history['loss']
+
+epochs = range(len(loss))  # Get number of epochs
+
+# ------------------------------------------------
+# Plot MAE and Loss
+# ------------------------------------------------
+plt.plot(epochs, mae, 'r')
+plt.plot(epochs, loss, 'b')
+plt.title('MAE and Loss')
+plt.xlabel("Epochs")
+plt.ylabel("Accuracy")
+plt.legend(["MAE", "Loss"])
+
+plt.figure()
+
+epochs_zoom = epochs[200:]
+mae_zoom = mae[200:]
+loss_zoom = loss[200:]
+
+# ------------------------------------------------
+# Plot Zoomed MAE and Loss
+# ------------------------------------------------
+plt.plot(epochs_zoom, mae_zoom, 'r')
+plt.plot(epochs_zoom, loss_zoom, 'b')
+plt.title('MAE and Loss')
+plt.xlabel("Epochs")
+plt.ylabel("Accuracy")
+plt.legend(["MAE", "Loss"])
+
+plt.figure()

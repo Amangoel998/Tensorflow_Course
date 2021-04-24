@@ -9,19 +9,19 @@ labels = []
 
 for item in datasore:
     sentences.append(item['headline'])
-    labels.append(item['is_sarcastic']) 
+    labels.append(item['is_sarcastic'])
 
 import tensorflow as tf
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
-vocab_size = 1000 #10000
+vocab_size = 1000  # 10000
 embedded_dim = 16
-max_length = 16 #32
+max_length = 16  # 32
 trunc_type = 'post'
 padding_type = 'post'
 oov_tok = '<OOV>'
-training_size=20000
+training_size = 20000
 
 # Tweaking vocab_size->1000, max_length->16 and embedding->32
 # May dec. loss but may also decrease accuracy.
@@ -80,12 +80,13 @@ import matplotlib.pyplot as plt
 
 
 def plot_graphs(history, string):
-  plt.plot(history.history[string])
-  plt.plot(history.history['val_'+string])
-  plt.xlabel("Epochs")
-  plt.ylabel(string)
-  plt.legend([string, 'val_'+string])
-  plt.show()
-  
+    plt.plot(history.history[string])
+    plt.plot(history.history['val_' + string])
+    plt.xlabel("Epochs")
+    plt.ylabel(string)
+    plt.legend([string, 'val_' + string])
+    plt.show()
+
+
 plot_graphs(history, "accuracy")
 plot_graphs(history, "loss")
